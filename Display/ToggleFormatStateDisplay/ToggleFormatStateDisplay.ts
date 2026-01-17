@@ -1,6 +1,6 @@
 import { DivC, HtmlComponentBase, HtmlElementProxy, LV2HtmlComponentBase, SpanC } from "SengenUI/index";
 import { z, ZodEnum } from "zod";
-import { ReactiveProperty } from "../../../BaseClasses/EventDrivenCode/observer";
+import { ReactiveProperty } from "TypeScriptBenriKakuchou/BaseClasses/observer";
 
 
 

@@ -1,4 +1,4 @@
-import { ReactiveProperty } from "../../BaseClasses/EventDrivenCode/observer";
+import { ReactiveProperty } from "TypeScriptBenriKakuchou/BaseClasses/observer";
 import { IOpenCloseWindow } from "./IOpenCloseWindow";
 
 export interface IToggleWindow extends IOpenCloseWindow {

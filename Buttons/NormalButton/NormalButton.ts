@@ -1,6 +1,6 @@
 import { ButtonC, HaveHtmlElementProxy, HtmlComponentBase, HtmlElementProxy, LV2HtmlComponentBase } from "SengenUI/index";
 
-import { ReactiveProperty } from "../../../BaseClasses/EventDrivenCode/observer";
+import { ReactiveProperty } from "TypeScriptBenriKakuchou/BaseClasses/observer";
 import { IButton } from "../IButton";
 import { VanillaExtractClassName } from "TypeScriptBenriKakuchou/VanilaExtractExtend.ts/VanillaExtractClassName";
 
