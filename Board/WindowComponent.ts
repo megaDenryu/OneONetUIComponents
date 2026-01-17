@@ -5,7 +5,7 @@ import { ButtonC, DivC, Drag中値, Drag終了値, Drag開始値, HtmlComponentB
 
 
 import { NormalButton } from "../Buttons/NormalButton/NormalButton";
-import { OpenCloseDelegator } from "../../AppPage/AppVoiroStudio/WindowManager/IWindow";
+import { OpenCloseDelegator } from "./WindowManager/IWindow";
 import { characterSettingWindow, dragHandle, headerSection, scrollableContent, windowCloseButton } from "./style.css";
 
 export class WindowComponent extends LV2HtmlComponentBase  {
