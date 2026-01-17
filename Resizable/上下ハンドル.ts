@@ -1,10 +1,4 @@
-import { DivC, HtmlComponentBase, HtmlElementProxy, LV2HtmlComponentBase, Percent長さ, Px長さ } from "SengenUI/index";
-import { divideVectorN, dotVectorN, minusVectorN, plusVectorN, timesVectorN, VectorN, VectorNと見なせる } from "../../Math/LinearAlgebra/vector";
-
-
-
-
-
+import { DivC, HtmlComponentBase, HtmlElementProxy, LV2HtmlComponentBase, Percent長さ, Px長さ, divideVectorN, dotVectorN, minusVectorN, plusVectorN, timesVectorN, VectorN, VectorNと見なせる  } from "SengenUI/index";
 export * from "./style.css";
 import { 上下ハンドルbase, 上下ハンドル色紫, 上下ハンドル色赤, 上下ハンドル色青, 上下ハンドルランダムカラー, ハンドル形状横フル } from "./style.css";
 import { IVerticalLayoutSyncController } from "./IWidthPercentageController";

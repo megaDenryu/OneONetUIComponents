@@ -17,7 +17,6 @@ export * from './Display/ToggleFormatStateDisplay/ToggleFormatStateDisplay';
 export * from './Resizable/IWidthPercentageController';
 export * from './Resizable/LayoutSyncController';
 export * from './Resizable/リサイズ可能四角形';
-export * from './Resizable/リサイズ可能左サイドバー';
 export * from './Resizable/上下ハンドル';
 export * from './Resizable/左右ハンドル';
 export * from './Slider/値付きスライダーC';
