@@ -7,7 +7,6 @@ export * from './Buttons/DirectorySelectButton/DirectorySelectButton';
 export * from './Buttons/FileSelectButton/FileSelectButton';
 export * from './Buttons/IButton';
 export * from './Buttons/NormalButton/NormalButton';
-export * from './Buttons/SettingsLinkButton/SettingsLinkButton';
 export * from './Buttons/ToggleButton/SelectableButton';
 export * from './Buttons/ToggleButton/循環ボタンC';
 export * from './Display/IToggleFormatStateDisplay';

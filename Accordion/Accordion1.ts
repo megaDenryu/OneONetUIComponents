@@ -1,5 +1,5 @@
 import { DivC, DivOptions, HtmlComponentBase, LV2HtmlComponentBase } from "SengenUI/index";
-import { visible,hidden } from "../../AppPage/AppVoiroStudio/VoiroStudioWindowConponent/Components/HumanTabGroup/HumanTabParts/HumanArea/HumanBodyView/Parts/BodyPartCanvas/style.css";
+import { hidden, visible } from "./style.css";
 
 
 
@@ -9,16 +9,7 @@ export enum アコーディオン状態 {
     折りたたみ = "折りたたみ"
 }
 
-export function toCss(状態: アコーディオン状態): string {
-    switch (状態) {
-        case アコーディオン状態.展開:
-            return visible;
-        case アコーディオン状態.折りたたみ:
-            return hidden; // ここではCSSクラス名を直接返す
-        default:
-            throw new Error("不正なアコーディオン状態です");
-    }
-}
+
 
 export interface アコーディオンSeed {
     options?: DivOptions;
