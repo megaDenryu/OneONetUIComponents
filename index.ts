@@ -45,3 +45,4 @@ export * from './TypeInput/RecordInput/RecordInput';
 export * from './TypeInput/TextInput/MultilineTextInput';
 export * from './TypeInput/TextInput/ReadonlyTextDisplay';
 export * from './TypeInput/TextInput/TextInput';
+export * from './TypeInput/BlindableTextInput/BlindableTextInput';
