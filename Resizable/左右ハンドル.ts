@@ -91,10 +91,11 @@ export class 左右ハンドル extends LV2HtmlComponentBase {
      * マウスイベントからハンドルの点を生成する
      */
     private マウスイベントからハンドルの点を生成(event: MouseEvent): ハンドルの点 {
-        const currentX = new Px長さ(event.clientX);
-        const dx = currentX.minus(this.直前のハンドルの点.x);
+        const 親のleft = this.dom.get親要素の画面内での座標().x;
+        const 親内での相対X = new Px長さ(event.clientX).minus(親のleft);
+        const dx = 親内での相対X.minus(this.直前のハンドルの点.x);
         const 親の横幅 = this.dom.get親要素のコンテキスト().width;
-        const clampedPercent = this.clampPercent(currentX.toPercent(親の横幅));
+        const clampedPercent = this.clampPercent(親内での相対X.toPercent(親の横幅));
         return new ハンドルの点(clampedPercent.toPx(親の横幅), clampedPercent, dx);
     }
 
