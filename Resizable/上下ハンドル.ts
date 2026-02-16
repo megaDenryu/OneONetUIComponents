@@ -81,10 +81,11 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
      * マウスイベントからハンドルの点を生成する
      */
     private マウスイベントからハンドルの点を生成(event: MouseEvent): 上下ハンドルの点 {
-        const currentY = new Px長さ(event.clientY);
-        const dy = currentY.minus(this.直前のハンドルの点.y);
+        const 親のtop = this.dom.get親要素の画面内での座標().y;
+        const 親内での相対Y = new Px長さ(event.clientY).minus(親のtop);
+        const dy = 親内での相対Y.minus(this.直前のハンドルの点.y);
         const 親の高さ = this.dom.get親要素のコンテキスト().height;
-        const clampedPercent = this.clampPercent(currentY.toPercent(親の高さ));
+        const clampedPercent = this.clampPercent(親内での相対Y.toPercent(親の高さ));
         return new 上下ハンドルの点(clampedPercent.toPx(親の高さ), clampedPercent, dy);
     }
 
