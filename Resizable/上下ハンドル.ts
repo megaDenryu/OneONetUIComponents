@@ -21,8 +21,6 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
     private maxPercent: Percent長さ;
     private 現在のパーセント: Percent長さ; // ウィンドウリサイズ時に使用
     private resizeHandler: () => void; // リサイズイベントハンドラーの参照を保持
-    private ドラッグ開始時のY: number = 0;
-    private ドラッグ開始時のパーセント: Percent長さ = new Percent長さ(0);
 
     public constructor(seed: { dyで操作されるもの?: dyで操作されるもの, verticalLayoutSyncController?: IVerticalLayoutSyncController, minPercent: Percent長さ, maxPercent: Percent長さ, initialPercent: Percent長さ }) {
         super();
@@ -33,7 +31,6 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
         this.maxPercent = seed.maxPercent;
         this.isDragging = false;
         this.現在のパーセント = seed.initialPercent;
-        this.直前のハンドルの点 = new 上下ハンドルの点(new Px長さ(0), seed.initialPercent, new Px長さ(0));
 
         // ウィンドウリサイズ時にハンドル位置を更新
         this.resizeHandler = () => this.ハンドル位置を更新(this.パーセントからハンドルの点を生成(this.現在のパーセント));
@@ -45,7 +42,7 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
         document.addEventListener('mouseup', (event) => { this.dragStartEnd(false); });
         return new DivC({ class: 上下ハンドルbase })
             .addDivEventListener("mouseover", (event) => { })
-            .addDivEventListener('mousedown', (event) => { event.preventDefault(); this.dragStartEnd(true, event) })
+            .addDivEventListener('mousedown', (event) => { event.preventDefault(); this.dragStartEnd(true) })
             .addDivEventListener('mousemove', (event) => { this.onMouseMove(event); })
             .addDivEventListener('mouseup', (event) => { this.dragStartEnd(false) });
     }
@@ -65,8 +62,7 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
      */
     private ハンドル位置を更新(新しいハンドルの点: 上下ハンドルの点): void {
         this.現在のパーセント = 新しいハンドルの点.y_percent;
-        // position: relativeの場合はtopを設定しない（flexboxで自然に配置）
-        // this.setStyleCSS({ top: 新しいハンドルの点.y_percent.toCssValue() });
+        this.setStyleCSS({ top: 新しいハンドルの点.y_percent.toCssValue() });
         this.直前のハンドルの点 = 新しいハンドルの点;
         this._dyで操作されるもの?.inputDy(新しいハンドルの点.dy);
         this._verticalLayoutSyncController?.updateLayoutFromHandlePosition(新しいハンドルの点.y_percent);
@@ -83,16 +79,13 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
 
     /**
      * マウスイベントからハンドルの点を生成する
-     * ドラッグ開始時のマウス位置との差分（デルタ）でパーセントを計算する
      */
     private マウスイベントからハンドルの点を生成(event: MouseEvent): 上下ハンドルの点 {
+        const currentY = new Px長さ(event.clientY);
+        const dy = currentY.minus(this.直前のハンドルの点.y);
         const 親の高さ = this.dom.get親要素のコンテキスト().height;
-        const deltaY = event.clientY - this.ドラッグ開始時のY;
-        const deltaPercent = new Px長さ(deltaY).toPercent(親の高さ);
-        const newPercent = new Percent長さ(this.ドラッグ開始時のパーセント.値 + deltaPercent.値);
-        const clampedPercent = this.clampPercent(newPercent);
-        const dy = new Px長さ(event.clientY).minus(this.直前のハンドルの点.y);
-        return new 上下ハンドルの点(new Px長さ(event.clientY), clampedPercent, dy);
+        const clampedPercent = this.clampPercent(currentY.toPercent(親の高さ));
+        return new 上下ハンドルの点(clampedPercent.toPx(親の高さ), clampedPercent, dy);
     }
 
     /**
@@ -128,14 +121,8 @@ export class 上下ハンドル extends LV2HtmlComponentBase {
         return this;
     }
 
-    private dragStartEnd(isStart: boolean, event?: MouseEvent) {
+    private dragStartEnd(isStart: boolean) {
         this.isDragging = isStart;
-        if (isStart && event) {
-            // ドラッグ開始時のマウスYと現在のパーセントを記録
-            this.ドラッグ開始時のY = event.clientY;
-            this.ドラッグ開始時のパーセント = this.現在のパーセント;
-            this.直前のハンドルの点 = new 上下ハンドルの点(new Px長さ(event.clientY), this.現在のパーセント, new Px長さ(0));
-        }
         switch (isStart) {
             case true: console.log("上下ドラッグ開始"); break;
             case false: console.log("上下ドラッグ終了"); break;

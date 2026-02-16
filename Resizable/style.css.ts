@@ -114,11 +114,9 @@ export const ハンドル形状縦フル = style({
 
 // 上下ハンドル用スタイル
 export const 上下ハンドルbase = style({
-    position: 'relative',
+    position: 'absolute',
     cursor: 'n-resize',
-    opacity: 0.3,
-    zIndex: 10,
-    flexShrink: 0,
+    opacity: 0.1,
 });
 
 export const 上下ハンドル色青 = style({
