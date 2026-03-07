@@ -1,4 +1,5 @@
 import { ButtonC, DivC, HtmlComponentBase, InputC, LV2HtmlComponentBase, SpanC } from "SengenUI/index";
+import { eyeIcon, lockIcon } from "../../../OneONetSvg/Icons";
 import { ITextInput } from "../Interfaces/IInputComponent";
 import {
     blindable_input_container,
@@ -99,14 +100,14 @@ export class BlindableTextInput extends LV2HtmlComponentBase implements ITextInp
                     });
                 }),
                 new ButtonC({
-                    text: this._isHidden ? "👁" : "🔒", // 👁 (表示する), 🔒 (隠す/隠れている状態に戻す) -> 一般的には 👁 (show) / 👁‍🗨 (hide) or similar. Let's use 👁 and 🙈 or similar. 
-                             // User requirement: "display/hide button on the right causes ● and actual text to swap".
-                             // Let's use emoji for now. 
                     class: blindable_input_toggle_button
                 }).bind(btn => {
                     this._toggleButton = btn;
+                    // SVGアイコンをボタンに追加
+                    const iconComponent = this._isHidden ? eyeIcon(18, 'currentColor') : lockIcon(18, 'currentColor');
+                    btn.dom.element.appendChild(iconComponent.dom.element);
                     btn.addTypedEventListener("click", (e) => {
-                        e.preventDefault(); // フォーム送信などを防ぐ
+                        e.preventDefault();
                         this.toggleVisibility();
                     });
                 })
@@ -135,10 +136,18 @@ export class BlindableTextInput extends LV2HtmlComponentBase implements ITextInp
         // Inputのtypeを変更
         this._input.setType(this._isHidden ? "password" : "text");
         
-        // ボタンのテキスト/アイコンを変更
-        // 隠れている時(password) -> ボタンは「表示」機能(👁)
-        // 表示されている時(text) -> ボタンは「隠す」機能(🔒 or 🙈)
-        this._toggleButton.setTextContent(this._isHidden ? "👁" : "🔒");
+        // ボタンのアイコンを変更
+        // 隠れている時(password) -> ボタンは「表示」機能(目のアイコン)
+        // 表示されている時(text) -> ボタンは「隠す」機能(鍵のアイコン)
+        // 前のSVGアイコンを削除
+        const buttonElement = this._toggleButton.dom.element as HTMLButtonElement;
+        while (buttonElement.firstChild) {
+            buttonElement.removeChild(buttonElement.firstChild);
+        }
+        
+        // 新しいSVGアイコンを追加
+        const newIconComponent = this._isHidden ? eyeIcon(18, 'currentColor') : lockIcon(18, 'currentColor');
+        buttonElement.appendChild(newIconComponent.dom.element);
     }
 
     // ========================================

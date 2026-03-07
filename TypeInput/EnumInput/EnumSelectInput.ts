@@ -138,6 +138,53 @@ export class EnumSelectInput<T extends string | number> extends LV2HtmlComponent
     }
 
     /**
+     * 選択肢のリストを動的に更新する。
+     * @param options 新しいEnumOptionの配列
+     * @param config.silent trueの場合、onChangeリスナーへの通知を抑制する。
+     *   プログラム的に選択肢を差し替えるだけで副作用（保存等）を起こしたくない場合に使用する。
+     */
+    public setOptions(options: EnumOption<T>[], config?: { silent?: boolean }): this {
+        const silent = config?.silent ?? false;
+        this.options.options = options;
+        
+        // selectのDOMから既存のoptionを全て削除
+        const selectElement = this.selectComponent.dom.element as HTMLSelectElement;
+        while (selectElement.firstChild) {
+            selectElement.removeChild(selectElement.firstChild);
+        }
+
+        // プレースホルダーオプション
+        if (this.options.placeholder) {
+            const defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.text = this.options.placeholder;
+            defaultOption.selected = !this.options.initialValue;
+            selectElement.appendChild(defaultOption);
+        }
+
+        // 新しいオプション要素を追加
+        this.options.options.forEach((opt) => {
+            const optionElement = document.createElement("option");
+            optionElement.value = String(opt.value);
+            optionElement.text = opt.icon ? `${opt.icon} ${opt.label}` : opt.label;
+            
+            // 現在の選択値と一致、またはinitialValueと一致する場合はselectedにする
+            if (this.currentValue === opt.value || (!this.currentValue && opt.value === this.options.initialValue)) {
+                optionElement.selected = true;
+                this.currentValue = opt.value;
+            }
+            selectElement.appendChild(optionElement);
+        });
+
+        // silent でない場合のみリスナーへ通知する
+        if (!silent && this.currentValue !== undefined) {
+             this.emitChange(this.currentValue);
+        }
+
+        return this;
+    }
+
+    /**
      * 複数のクラスを結合する。
      */
     private combineClasses(base: string | string[], extra?: string | string[]): string | string[] {
