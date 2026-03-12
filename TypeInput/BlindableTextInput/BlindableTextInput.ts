@@ -1,5 +1,5 @@
 import { ButtonC, DivC, HtmlComponentBase, InputC, LV2HtmlComponentBase, SpanC } from "SengenUI/index";
-import { eyeIcon, lockIcon } from "../../../OneONetSvg/Icons";
+import { eyeIcon, lockIcon } from "../../Svg/Icons";
 import { ITextInput } from "../Interfaces/IInputComponent";
 import {
     blindable_input_container,
