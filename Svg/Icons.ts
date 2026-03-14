@@ -55,8 +55,6 @@ export const trashIcon = (size = 18, color = 'currentColor') =>
     'M14 11v6'
   ]);
 
-export const sendIcon = (size = 18, color = 'currentColor') => 
-  createIcon(size, color, ['m22 2-7 20-4-9-9-4Z', 'M22 2 11 13']);
 
 // --- Video Control Icons ---
 
@@ -79,3 +77,65 @@ export const maximizeIcon = (size = 20, color = 'currentColor') =>
 
 export const chatIcon = (size = 20, color = 'currentColor') => 
     createIcon(size, color, ['M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z']);
+
+
+export const createMessageSquareIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z']);
+
+export const messageSquareIcon = createMessageSquareIcon;
+
+export const createCodeIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['m18 16 4-4-4-4', 'm6 8-4 4 4 4', 'm14.5 4-5 16']);
+
+export const codeIcon = createCodeIcon;
+
+export const createFileJsonIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, [
+    'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z',
+    'M14 2v4a2 2 0 0 0 2 2h4',
+    'M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1',
+    'M14 12a1 1 0 0 1 1 1v1a1 1 0 0 0 1 1 1 1 0 0 0-1 1v1a1 1 0 0 1-1 1'
+  ], { stroke: '#fbbf24' }); // Amber 400
+
+export const fileJsonIcon = createFileJsonIcon;
+
+export const folderIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z']);
+
+export const fileIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z', 'M14 2v4a2 2 0 0 0 2 2h4']);
+
+export const settingsIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, [
+    'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z',
+    'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'
+  ]);
+
+export const downloadIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4', 'm7 10 5 5 5-5', 'M12 15V3']);
+
+export const sendIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['m22 2-7 20-4-9-9-4Z', 'M22 2 11 13']);
+
+export const paperclipIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.51a2 2 0 0 1-2.83-2.83l8.49-8.48']);
+
+export const micIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, [
+    'M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z',
+    'M19 10v2a7 7 0 0 1-14 0v-2',
+    'M12 19v3',
+    'M8 22h8'
+  ]);
+
+export const terminalIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['m4 17 6-6-6-6', 'M12 19h8']);
+
+export const xIcon = (size = 14, color = 'currentColor') => 
+  createIcon(size, color, ['M18 6 6 18', 'M6 6l12 12']);
+
+export const chevronRightIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, ['m9 18 6-6-6-6']);
+
+export const chevronDownIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, ['m6 9 6 6 6-6']);
