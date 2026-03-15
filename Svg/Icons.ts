@@ -99,8 +99,17 @@ export const createFileJsonIcon = (size = 14, color = 'currentColor') =>
 
 export const fileJsonIcon = createFileJsonIcon;
 
-export const folderIcon = (size = 14, color = 'currentColor') => 
+export const folderIcon = (size = 14, color = 'currentColor') =>
   createIcon(size, color, ['M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z']);
+
+export const folderOpenIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, [
+    'M6 14 1.35-5.41A2 2 0 0 1 9.29 7h10.22a2 2 0 0 1 1.94 2.59L20.1 14',
+    'M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z'
+  ]);
+
+export const uploadIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, ['M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4', 'm7 10 5-5 5 5', 'M12 15V3']);
 
 export const fileIcon = (size = 14, color = 'currentColor') => 
   createIcon(size, color, ['M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z', 'M14 2v4a2 2 0 0 0 2 2h4']);
@@ -139,3 +148,15 @@ export const chevronRightIcon = (size = 14, color = 'currentColor') =>
 
 export const chevronDownIcon = (size = 14, color = 'currentColor') =>
   createIcon(size, color, ['m6 9 6 6 6-6']);
+
+export const globeIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, ['M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z', 'M2 12h20', 'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z']);
+
+export const paletteIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, [
+    'M12 2a10 10 0 0 0-1.16 19.93A2 2 0 0 0 13 20v-1a2 2 0 0 1 2-2h1.17c.94 0 1.67-.72 1.92-1.63A10 10 0 0 0 12 2Z',
+    'M6.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
+    'M10 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
+    'M14 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
+    'M17.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z'
+  ]);
