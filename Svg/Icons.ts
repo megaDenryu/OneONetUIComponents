@@ -152,6 +152,25 @@ export const chevronDownIcon = (size = 14, color = 'currentColor') =>
 export const globeIcon = (size = 14, color = 'currentColor') =>
   createIcon(size, color, ['M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z', 'M2 12h20', 'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z']);
 
+export const stickyNoteIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, [
+    'M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z',
+    'M15 3v4a2 2 0 0 0 2 2h4'
+  ]);
+
+export const externalLinkIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, [
+    'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6',
+    'M15 3h6v6',
+    'M10 14 21 3'
+  ]);
+
+export const slidersIcon = (size = 14, color = 'currentColor') =>
+  createIcon(size, color, [
+    'M4 21v-7', 'M4 10V3', 'M12 21v-9', 'M12 8V3', 'M20 21v-5', 'M20 12V3',
+    'M2 10h4', 'M10 8h4', 'M18 12h4'
+  ]);
+
 export const paletteIcon = (size = 14, color = 'currentColor') =>
   createIcon(size, color, [
     'M12 2a10 10 0 0 0-1.16 19.93A2 2 0 0 0 13 20v-1a2 2 0 0 1 2-2h1.17c.94 0 1.67-.72 1.92-1.63A10 10 0 0 0 12 2Z',

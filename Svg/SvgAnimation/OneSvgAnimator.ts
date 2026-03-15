@@ -227,4 +227,12 @@ export class SvgAnimator extends LV2HtmlComponentBase {
         this._componentRoot = div();
         this.animator = new UniversalAnimator(this._componentRoot.dom.element, avatar, timeline);
     }
+
+    public play(): void {
+        this.animator.play();
+    }
+
+    public pause(): void {
+        this.animator.pause();
+    }
 }
