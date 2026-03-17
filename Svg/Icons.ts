@@ -3,7 +3,7 @@
  * named export関数のため、未使用アイコンはtree-shakingで除去される。
  */
 
-import { icon } from "SengenUI/index";
+import { createIcon, icon } from "SengenUI/index";
 
 
 // --- App Specific Icons ---
