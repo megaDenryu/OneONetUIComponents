@@ -1,4 +1,4 @@
-import { ButtonC, DivC, Drag中値, Drag終了値, Drag開始値, HtmlComponentBase, HtmlComponentChild, LV2HtmlComponentBase, MouseWife, 位置管理 } from "SengenUI/index";
+import { ButtonC, DivC, Drag中値, Drag終了値, Drag開始値, HtmlComponentBase, HtmlComponentChild, LV2HtmlComponentBase, MouseWife, 位置管理, 表示切替 } from "SengenUI/index";
 
 
 
@@ -69,14 +69,14 @@ export class WindowComponent extends LV2HtmlComponentBase  {
 
     public close(): void {
         this.openCloseDelegator.onClose();
-        this.dom.hide();
+        this.setAttribute(表示切替.attribute, 表示切替.value.hidden);
     }
 
     public open(): void {
         this.openCloseDelegator.onOpen();
         // 初回表示時に位置を設定
         this.setInitialWindowPosition();
-        this.dom.show();
+        this.toggleAttribute(表示切替.attribute, false);
     }
 
     // 初期位置設定のみを行う（スタイルはvanilla extractで定義される）

@@ -1,4 +1,4 @@
-import { DivC, HaveHtmlElementProxy, LV2HtmlComponentBase } from "SengenUI/index";
+import { DivC, HaveHtmlElementProxy, LV2HtmlComponentBase, 表示切替 } from "SengenUI/index";
 
 
 
@@ -55,16 +55,16 @@ export class SentenceDisplay extends LV2HtmlComponentBase {
     }
 
     public isOpenned(): boolean {
-        return this.dom.isShow;
+        return !this.dom.element.hasAttribute(表示切替.attribute);
     }
 
     public open(): SentenceDisplay {
-        this.dom.show();
+        this.toggleAttribute(表示切替.attribute, false);
         return this;
     }
 
     public close(): SentenceDisplay {
-        this.dom.hide();
+        this.setAttribute(表示切替.attribute, 表示切替.value.hidden);
         return this;
     }
 
