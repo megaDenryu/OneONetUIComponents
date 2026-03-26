@@ -6,7 +6,7 @@
  * 複合コンポーネントを構築しやすくなる。
  */
 export interface IInputComponent<T> {
-    bind(func:(component: this) => void): this
+    tap(func:(component: this) => void): this
     /**
      * 現在の値を取得する
      * @returns 現在の値

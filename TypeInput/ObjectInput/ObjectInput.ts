@@ -182,7 +182,7 @@ export class ObjectProperty<TObj extends Record<string, any>, TField extends Rec
         this.label = label;
     }
 
-    public bind(func: (self: this) => void): this {
+    public tap(func: (self: this) => void): this {
         func(this);
         return this;
     }
@@ -203,7 +203,7 @@ export class ListProperty<TObj extends Record<string, any>, TField> implements I
         this.label = label;
     }
 
-    public bind(func: (self: this) => void): this {
+    public tap(func: (self: this) => void): this {
         func(this);
         return this;
     }
@@ -220,7 +220,7 @@ export class ListProperty<TObj extends Record<string, any>, TField> implements I
 export interface IProperty<TObj extends Record<string, any>, TField> {
     propertyType: PropertyType<TObj, TField>;
     options: PropertyOptions<TObj, TField>;
-    bind(func: (self: IProperty<TObj, TField>) => void): IProperty<TObj, TField>;
+    tap(func: (self: IProperty<TObj, TField>) => void): IProperty<TObj, TField>;
 }
 
 /**
@@ -230,7 +230,7 @@ export interface IObjectProperty<TObj extends Record<string, any>, TField extend
     key: keyof TObj;
     label?: string;
     objectInput2: ObjectInput<TField>;
-    bind(func: (self: IObjectProperty<TObj, TField>) => void): IObjectProperty<TObj, TField>;
+    tap(func: (self: IObjectProperty<TObj, TField>) => void): IObjectProperty<TObj, TField>;
 }
 
 /**
@@ -241,7 +241,7 @@ export interface IListProperty<TObj extends Record<string, any>, TField> {
     label?: string;
     listConfig: ListFieldConfig<TField>;
     options?: PropertyOptions<TObj, TField[]>;
-    bind(func: (self: IListProperty<TObj, TField>) => void): IListProperty<TObj, TField>;
+    tap(func: (self: IListProperty<TObj, TField>) => void): IListProperty<TObj, TField>;
     withOptions(options: PropertyOptions<TObj, TField[]>): IListProperty<TObj, TField>;
 }
 
@@ -254,7 +254,7 @@ export class Property<TObj extends Record<string, any>, TField = any> implements
         this.options = options;
     }
 
-    public bind(func: (self: this) => void): this {
+    public tap(func: (self: this) => void): this {
         func(this);
         return this;
     }
@@ -290,7 +290,7 @@ export interface IObjectInputExtended<T extends Record<string, any>> extends IOb
     setPerformanceMode(enabled: boolean): this;
 
     // UIComponentBase継承
-    bind(func: (self: this) => void): this;
+    tap(func: (self: this) => void): this;
 }
 
 /**
