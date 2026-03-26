@@ -74,7 +74,7 @@ export class EnumRadioGroupInput<T extends string | number> extends LV2HtmlCompo
             checked: isChecked,
             disabled: isDisabled,
             class: radio_input
-        }).bind((input) => {
+        }).tap((input) => {
             this.radioInputs.set(opt.value, input);
         });
 

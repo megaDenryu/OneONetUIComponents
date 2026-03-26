@@ -39,13 +39,13 @@ export class BoolToggleSwitchInput extends LV2HtmlComponentBase {
                     disabled: this.options.disabled,
                     checked: this.options.initialValue ?? false
                 })
-                .bind((component) => {
+                .tap((component) => {
                     this.inputComponent = component;
                     this.currentValue = this.options.initialValue ?? false;
                 });
 
         const slider = new SpanC({ text: "", class: toggle_slider })
-                .bind((component) => {
+                .tap((component) => {
                     this.sliderComponent = component;
                     if (this.options.initialValue) {
                         component.addClass(toggle_slider_checked);

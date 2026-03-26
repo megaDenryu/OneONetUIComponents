@@ -101,7 +101,7 @@ class DynamicListItem {
             new DivC({ class: dynamic_list_item_content }).childs([
                 this.typeSelector,
                 this.valueComponent
-            ]).bind((div) => { this._contentDiv = div; }), // 参照を保持
+            ]).tap((div) => { this._contentDiv = div; }), // 参照を保持
             new DivC().childs([
                 new ButtonC({ text: '↑' }).addTypedEventListener('click', () => this._onMoveUp(this._index)),
                 new ButtonC({ text: '↓' }).addTypedEventListener('click', () => this._onMoveDown(this._index))

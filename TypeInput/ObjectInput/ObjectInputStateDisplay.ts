@@ -96,7 +96,7 @@ export class ObjectInputStateDisplay extends LV2HtmlComponentBase {
                         overflowY: "auto",
                         maxHeight: `${this._options.maxLines * 20}px`,
                         color: "#212529"
-                    }).bind((div) => {
+                    }).tap((div) => {
                         this._valueDisplay = div;
                         this.renderValue(this._options.initialValue);
                     })

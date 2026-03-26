@@ -103,12 +103,12 @@ export class ListEditorInput<T> extends LV2HtmlComponentBase implements IListInp
 
     protected createComponentRoot(): HtmlComponentBase {
         return new DivC({class: list_editor_container}).childs([
-            new DivC({class: list_items_container}).bind((container) => {
+            new DivC({class: list_items_container}).tap((container) => {
                 this._itemsContainer = container;
             }),
             new ButtonC({text: "+ 項目を追加", class: list_add_button})
                 .addTypedEventListener("click", () => {this.onAddButtonClick();})
-                .bind((button) => {this._addButton = button;})
+                .tap((button) => {this._addButton = button;})
         ]);
     }
 

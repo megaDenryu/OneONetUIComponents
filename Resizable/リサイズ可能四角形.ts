@@ -117,20 +117,20 @@ export class リサイズ可能四角形 extends LV2HtmlComponentBase {
     }
 
     protected createComponentRoot(): HtmlComponentBase {
-        const rootDiv = new DivC({ class: resizable_rectangle_container }).bind((container) => { this.container = container; }).childs([
+        const rootDiv = new DivC({ class: resizable_rectangle_container }).tap((container) => { this.container = container; }).childs([
                             // メインの四角形
-                            new DivC({ class: resizable_rectangle }).bind((rect) => { this.rectangle = rect; }),
+                            new DivC({ class: resizable_rectangle }).tap((rect) => { this.rectangle = rect; }),
                             // エッジハンドル
-                            new DivC({ class: [resize_handle, resize_handle_top] }).bind((handle) => { this.topHandle = handle; }),
-                            new DivC({ class: [resize_handle, resize_handle_bottom] }).bind((handle) => { this.bottomHandle = handle; }),
-                            new DivC({ class: [resize_handle, resize_handle_left] }).bind((handle) => { this.leftHandle = handle; }),
-                            new DivC({ class: [resize_handle, resize_handle_right] }).bind((handle) => { this.rightHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_top] }).tap((handle) => { this.topHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_bottom] }).tap((handle) => { this.bottomHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_left] }).tap((handle) => { this.leftHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_right] }).tap((handle) => { this.rightHandle = handle; }),
 
                             // コーナーハンドル
-                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_top_left] }).bind((handle) => { this.topLeftHandle = handle; }),
-                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_top_right] }).bind((handle) => { this.topRightHandle = handle; }),
-                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_bottom_left] }).bind((handle) => { this.bottomLeftHandle = handle; }),
-                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_bottom_right] }).bind((handle) => { this.bottomRightHandle = handle; })
+                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_top_left] }).tap((handle) => { this.topLeftHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_top_right] }).tap((handle) => { this.topRightHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_bottom_left] }).tap((handle) => { this.bottomLeftHandle = handle; }),
+                            new DivC({ class: [resize_handle, resize_handle_corner, resize_handle_bottom_right] }).tap((handle) => { this.bottomRightHandle = handle; })
                         ]);
          return rootDiv;
     }

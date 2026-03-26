@@ -466,7 +466,7 @@ export class RecordInput<V> extends LV2HtmlComponentBase implements IRecordInput
             const rowClass = isTable ? record_entry_row_table : record_entry_row;
 
             const row = new DivC({ class: rowClass })
-                .bind((div) => {
+                .tap((div) => {
                     // テーブルレイアウトの場合は動的にグリッドカラムを設定
                     if (isTable) {
                         div.setStyleCSS({

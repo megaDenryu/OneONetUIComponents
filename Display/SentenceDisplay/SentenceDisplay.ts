@@ -37,12 +37,12 @@ export class SentenceDisplay extends LV2HtmlComponentBase {
                     new DivC({class: sentence_display_header}).childs([
                         new DivC({class: sentence_display_title, text: this.title}),
                         new NormalButton("閉じる", closeButton)
-                            .bind((button) => {this._closeButton = button;})
+                            .tap((button) => {this._closeButton = button;})
                             .addOnClickEvent(() => {this.close();})
                     ]),
                     new DivC({class: sentence_display_content}).childs([
                         new NormalText(this._sentence)
-                            .bind((text) => {this._sentenceDisplay = text;})
+                            .tap((text) => {this._sentenceDisplay = text;})
                     ])
                 ]).setStyleCSS({
                     width: this._width ?? '400px',

@@ -111,7 +111,7 @@ export class MultiSelectInput<T extends string | number> extends LV2HtmlComponen
             new DivC({ class: groupClass }).childs(items),
             ...(this._options.showCount ? [
                 new DivC({ class: multiselect_selected_count })
-                    .bind((div) => {
+                    .tap((div) => {
                         this._countDisplay = div;
                         this.updateCountDisplay();
                     })
@@ -149,7 +149,7 @@ export class MultiSelectInput<T extends string | number> extends LV2HtmlComponen
             new DivC({ class: groupClass }).childs(items),
             ...(this._options.showCount ? [
                 new DivC({ class: multiselect_selected_count })
-                    .bind((div) => {
+                    .tap((div) => {
                         this._countDisplay = div;
                         this.updateCountDisplay();
                     })

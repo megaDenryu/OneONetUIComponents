@@ -43,7 +43,7 @@ export class InputStateDisplay extends LV2HtmlComponentBase {
                     new SpanC({ text: this.options.initialValue ?? "" }).setStyleCSS({
                         color: "#2196F3",
                         fontWeight: "500"
-                    }).bind((span) => {this.valueSpan = span;})
+                    }).tap((span) => {this.valueSpan = span;})
                 ]);
     }
 

@@ -43,8 +43,8 @@ export class SquareBoardComponent extends LV2HtmlComponentBase implements IDragA
         return new DivC({ class: [square_board_base, margin] })
                     .setStyleCSS({ borderColor: this._borderColor })
                     .childs([
-                        new DivC({ class: square_board_header }).bind((div) => { this._headerContainer = div; }).childs([
-                            new DivC({ class: board_title, text: this.title }).bind((div) => { this._titleElement = div; })
+                        new DivC({ class: square_board_header }).tap((div) => { this._headerContainer = div; }).childs([
+                            new DivC({ class: board_title, text: this.title }).tap((div) => { this._titleElement = div; })
                         ])
                     ]);
     }

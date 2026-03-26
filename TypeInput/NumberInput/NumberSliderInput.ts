@@ -51,14 +51,14 @@ export class NumberSliderInput extends LV2HtmlComponentBase implements INumberIn
                         .setRangeParam(this.buildRangeParameters())
                         .onInput(() => {this.handleInputEvent();})
                         .onChange(() => {this.handleCommitEvent();})
-                        .bind((component) => {this.inputComponent = component;}),
+                        .tap((component) => {this.inputComponent = component;}),
                     new SpanC({
                         text: "",
                         class: this.combineClasses(slider_value, this.options.valueClass)
                     })
-                        .bind((component) => {this.valueLabel = component;})
+                        .tap((component) => {this.valueLabel = component;})
                 ])
-                .bind(() => {this.applyInitialValue();});
+                .tap(() => {this.applyInitialValue();});
     }
 
     /**

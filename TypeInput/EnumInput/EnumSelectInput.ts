@@ -68,7 +68,7 @@ export class EnumSelectInput<T extends string | number> extends LV2HtmlComponent
                 disabled: this.options.disabled,
                 options: selectOptions
             })
-                .bind((select) => {
+                .tap((select) => {
                     this.selectComponent = select;
                 })
                 .onSelectChange((event) => {

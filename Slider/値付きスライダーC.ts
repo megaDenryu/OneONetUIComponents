@@ -24,12 +24,12 @@ export class 値付きスライダーC extends LV2HtmlComponentBase {
 
     protected createComponentRoot(): DivC {
         return new DivC({ class: 値付きスライダー }).childs([
-                    new InputC({class: 値付きスライダー__input, type: 'range',}).bind((self)=>{this._slider = self;}).addInputEventListener('input', (event) => {this.onValueChanged(event);}).setRangeParam({
+                    new InputC({class: 値付きスライダー__input, type: 'range',}).tap((self)=>{this._slider = self;}).addInputEventListener('input', (event) => {this.onValueChanged(event);}).setRangeParam({
                         min: this._min,
                         max: this._max,
                         step: this._step
                     }).setValue(String(this._value)),
-                    new DivC({  class: 値付きスライダー__value, text: String(this._value) }).bind((self)=>{this._valueDisplay = self;})
+                    new DivC({  class: 値付きスライダー__value, text: String(this._value) }).tap((self)=>{this._valueDisplay = self;})
                 ]);
     }
 

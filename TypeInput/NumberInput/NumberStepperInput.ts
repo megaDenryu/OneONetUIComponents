@@ -54,7 +54,7 @@ export class NumberStepperInput extends LV2HtmlComponentBase {
                         class: this.combineClasses(stepper_button, this.options.decrementButtonClass)
                     })
                         .addTypedEventListener("click", () => {this.handleStep(-1);})
-                        .bind((component) => {this.decrementButton = component;}),
+                        .tap((component) => {this.decrementButton = component;}),
                     new InputC({
                         type: "text",
                         class: this.combineClasses(stepper_input, this.options.inputClass),
@@ -64,15 +64,15 @@ export class NumberStepperInput extends LV2HtmlComponentBase {
                         .setPattern(this.buildPattern())
                         .onInput(() => {this.handleInputEvent();})
                         .onChange(() => {this.handleCommitEvent();})
-                        .bind((component) => {this.inputComponent = component;}),
+                        .tap((component) => {this.inputComponent = component;}),
                     new ButtonC({
                         text: this.options.incrementLabel ?? ">",
                         class: this.combineClasses(stepper_button, this.options.incrementButtonClass)
                     })
                         .addTypedEventListener("click", () => {this.handleStep(1);})
-                        .bind((component) => {this.incrementButton = component;})
+                        .tap((component) => {this.incrementButton = component;})
                 ])
-                .bind(() => {this.applyInitialValue();});
+                .tap(() => {this.applyInitialValue();});
     }
 
     /**

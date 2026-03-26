@@ -33,9 +33,9 @@ export class ReadonlyTextDisplay extends LV2HtmlComponentBase implements IInputC
 
     protected createComponentRoot(): HtmlComponentBase {
         const container = new DivC({ class: readonly_text_display }).childs([
-                                new SpanC({ text: this._currentValue }).bind((span) => { this._textElement = span; })
+                                new SpanC({ text: this._currentValue }).tap((span) => { this._textElement = span; })
                             ])
-                            .bind((div) => { this._containerDiv = div; });
+                            .tap((div) => { this._containerDiv = div; });
         
         // 幅の設定
         if (this._width instanceof Px長さ) {

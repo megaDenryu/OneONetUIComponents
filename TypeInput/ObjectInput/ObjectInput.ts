@@ -403,7 +403,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
         } = options;
 
         // 変更イベント設定（パフォーマンス最適化付き）
-        inputComponent.bind((inputComponent) => {
+        inputComponent.tap((inputComponent) => {
             // デフォルト値設定
             if (defaultValue !== undefined) {
                 inputComponent.setValue(defaultValue);
@@ -449,7 +449,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
                 },
                 {
                     If: showErrorInline !== false, // エラー表示エリア。デフォルトはインライン表示。
-                    True: new DivC({ class: [object_input_error_message, object_input_error_message_full] }).bind(
+                    True: new DivC({ class: [object_input_error_message, object_input_error_message_full] }).tap(
                         (self) => { this._errorElements.set(key, self); }
                     )
                 }
@@ -466,7 +466,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
                 True: new SpanC({ text: label, class: object_input_label })
             },
             new DivC({ class: [object_input_nested, object_input_nested_full] }).child(
-                objectInput2.bind((objectInput) => {// ネストしたオブジェクトの値変更イベント設定とフィールド登録
+                objectInput2.tap((objectInput) => {// ネストしたオブジェクトの値変更イベント設定とフィールド登録
                     this._fieldComponents.set(key, objectInput as unknown as IInputComponent<any>);
                 }).onChange((value) => {
                     (this._currentValue as any)[key] = value;
@@ -487,7 +487,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
             minItems: listConfig.minItems || 0,
             maxItems: listConfig.maxItems || Infinity,
             allowReorder: listConfig.allowReorder ?? true
-        }).bind((editor) => {
+        }).tap((editor) => {
             this._fieldComponents.set(key, editor as any);
         }).onChange((value) => {
             (this._currentValue as any)[key] = value;

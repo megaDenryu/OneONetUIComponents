@@ -41,7 +41,7 @@ export class IntTextInput extends LV2HtmlComponentBase implements IIntInput {
                 .setPattern(this.buildPattern())
                 .onInput(() => {this.handleInputEvent();})
                 .onChange(() => {this.handleCommitEvent();})
-                .bind((self) => {
+                .tap((self) => {
                     this.inputComponent = self;
                     if (this.options.initialValue !== undefined) {this.setValue(this.options.initialValue);}
                     else {this.updateCurrentValueFromComponent();}

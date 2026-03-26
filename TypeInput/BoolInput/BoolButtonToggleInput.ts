@@ -40,7 +40,7 @@ export class BoolButtonToggleInput extends LV2HtmlComponentBase implements IBool
                     class: this.buildButtonClasses(this.options.initialValue ?? false)
                 })
                 .addTypedEventListener("click", () => {this.handleClick();})
-                .bind((component) => {
+                .tap((component) => {
                     this.buttonComponent = component;
                     this.currentValue = this.options.initialValue ?? false;
                     if (this.options.disabled) {

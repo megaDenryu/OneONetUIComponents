@@ -89,7 +89,7 @@ export class BlindableTextInput extends LV2HtmlComponentBase implements ITextInp
                     value: this._props.value || "",
                     class: this._getInputClasses(),
                     disabled: this._props.disabled
-                }).bind(input => {
+                }).tap(input => {
                     this._input = input;
                     if (this._props.maxLength) {
                         input.setMaxLength(this._props.maxLength);
@@ -101,7 +101,7 @@ export class BlindableTextInput extends LV2HtmlComponentBase implements ITextInp
                 }),
                 new ButtonC({
                     class: blindable_input_toggle_button
-                }).bind(btn => {
+                }).tap(btn => {
                     this._toggleButton = btn;
                     // SVGアイコンをボタンに追加
                     const iconComponent = this._isHidden ? eyeIcon(18, 'currentColor') : lockIcon(18, 'currentColor');

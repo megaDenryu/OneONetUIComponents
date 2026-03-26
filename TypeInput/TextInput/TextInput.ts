@@ -114,7 +114,7 @@ export class TextInput extends LV2HtmlComponentBase implements ITextInput {
                     value: this._props.value || "",
                     class: this._getInputClasses(),
                     disabled: this._props.disabled
-                }).bind(input => {
+                }).tap(input => {
                     this._input = input;
                     
                     if (this._props.maxLength) {

@@ -38,7 +38,7 @@ export class BoolCheckboxInput extends LV2HtmlComponentBase implements IBoolInpu
                     checked: this.options.initialValue ?? false
                 })
                 .addCheckboxEventListener("change", () => {this.handleChange();})
-                .bind((component) => {
+                .tap((component) => {
                     this.checkboxComponent = component;
                     this.currentValue = component.isChecked();
                 });

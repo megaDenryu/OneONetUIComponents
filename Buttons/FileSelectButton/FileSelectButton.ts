@@ -29,7 +29,7 @@ export class FileSelectButton extends LV2HtmlComponentBase {
 
     protected createComponentRoot(): HtmlComponentBase {
         return new DivC({ class: file_select_container })
-            .bind(container => { this._container = container; })
+            .tap(container => { this._container = container; })
             .childs([
                 this.FileInput(),
                 this.Button()
@@ -41,7 +41,7 @@ export class FileSelectButton extends LV2HtmlComponentBase {
             accept: this._props.fileFilter,
             multiple: this._props.acceptMultiple
         })
-            .bind(input => { this._fileInput = input; })
+            .tap(input => { this._fileInput = input; })
             .setStyleCSS({ display: 'none' });
 
         // 単一/複数ファイル選択に応じて型安全なメソッドを使用
@@ -63,7 +63,7 @@ export class FileSelectButton extends LV2HtmlComponentBase {
             this._props.buttonText || "ファイルを選択",
             "file-select-button"
         )
-            .bind(button => { this._button = button; })
+            .tap(button => { this._button = button; })
             .addOnClickEvent(() => {
                 this._fileInput.click();
             });

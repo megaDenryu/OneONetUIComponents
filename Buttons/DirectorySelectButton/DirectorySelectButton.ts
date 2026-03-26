@@ -42,7 +42,7 @@ export class DirectorySelectButton extends LV2HtmlComponentBase {
 
     protected createComponentRoot(): HtmlComponentBase {
         return new DivC({ class: directory_select_container })
-            .bind(container => { this._container = container; })
+            .tap(container => { this._container = container; })
             .childs([
                 this.DirectoryInput(),
                 this.Button()
@@ -53,7 +53,7 @@ export class DirectorySelectButton extends LV2HtmlComponentBase {
         const input = new DirectoryInputC({
             multiple: this._props.acceptMultiple
         })
-            .bind(input => { this._directoryInput = input; })
+            .tap(input => { this._directoryInput = input; })
             .setStyleCSS({ display: 'none' });
 
         // フォルダーパスのみを取得する場合
@@ -78,7 +78,7 @@ export class DirectorySelectButton extends LV2HtmlComponentBase {
             this._props.buttonText || "フォルダーを選択",
             "directory-select-button"
         )
-            .bind(button => { this._button = button; })
+            .tap(button => { this._button = button; })
             .addOnClickEvent(() => {
                 this._directoryInput.click();
             });

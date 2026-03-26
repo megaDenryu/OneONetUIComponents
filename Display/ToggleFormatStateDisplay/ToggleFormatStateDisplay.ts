@@ -48,7 +48,7 @@ export class ToggleFormatStateDisplay<T extends ZodEnum<any>> extends LV2HtmlCom
 
     protected createComponentRoot(): HtmlComponentBase {
         const rootDiv = (new DivC({class:["toggle-format-state-display", convertColorCss(this._color.get())]})).childs([
-                            (new SpanC({ text: this._state.get(), class: "state" })).bind((span) => {this.stateTextElement = span;})
+                            (new SpanC({ text: this._state.get(), class: "state" })).tap((span) => {this.stateTextElement = span;})
                         ]);
         return rootDiv;
     }

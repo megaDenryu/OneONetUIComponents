@@ -23,11 +23,11 @@ export class WindowComponent extends LV2HtmlComponentBase  {
     }
 
     protected createComponentRoot(title: string): HtmlComponentBase {
-        return new DivC({ class: characterSettingWindow }).bind((self) => { this._位置管理 = new 位置管理(self); }).childs([
+        return new DivC({ class: characterSettingWindow }).tap((self) => { this._位置管理 = new 位置管理(self); }).childs([
                     // ヘッダー部分（固定）
                     new DivC({ class: headerSection }).childs([
                         new DivC({ text: title, class: dragHandle })
-                            .bind((self) => {
+                            .tap((self) => {
                                 this._ドラッグハンドル = self;
                                 this._ヘッダータイトル = self;
                                 this._mouseWife = new MouseWife(self).ドラッグ連動登録(this);
@@ -36,7 +36,7 @@ export class WindowComponent extends LV2HtmlComponentBase  {
                             .addOnClickEvent(() => { this.close(); })
                     ]),
                     // コンテンツ部分（スクロール可能）
-                    new DivC({ class: scrollableContent }).bind((self) => { this._contentContainer = self; })
+                    new DivC({ class: scrollableContent }).tap((self) => { this._contentContainer = self; })
                 ]);
     }
 

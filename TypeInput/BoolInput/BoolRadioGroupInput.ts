@@ -42,7 +42,7 @@ export class BoolRadioGroupInput extends LV2HtmlComponentBase {
 
         return new DivC({class: this.combineClasses(radio_group_container, this.options.class)})
                 .childs([trueOption, falseOption])
-                .bind(() => {this.applyInitialValue();});
+                .tap(() => {this.applyInitialValue();});
     }
 
     /**
@@ -56,7 +56,7 @@ export class BoolRadioGroupInput extends LV2HtmlComponentBase {
                     disabled: this.options.disabled
                 })
                 .addRadioEventListener("change", () => {this.handleChange(value);})
-                .bind((component) => {
+                .tap((component) => {
                     if (value) {
                         this.trueRadio = component;
                     } else {

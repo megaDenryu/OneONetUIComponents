@@ -81,7 +81,7 @@ export class EnumButtonGroupInput<T extends string | number> extends LV2HtmlComp
                     this.handleChange(opt.value);
                 }
             })
-            .bind((btn) => {
+            .tap((btn) => {
                 this.buttons.set(opt.value, btn);
             });
 
