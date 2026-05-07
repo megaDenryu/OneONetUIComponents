@@ -161,6 +161,28 @@ export const slidersIcon = (size = 14, color = 'currentColor') =>
     'M2 10h4', 'M10 8h4', 'M18 12h4'
   ]);
 
+// 服(Tシャツ): 体スイッチ開閉ボタン
+export const shirtIcon = (size = 14, color = 'currentColor') =>
+  icon({ size, color, paths: [
+    'M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z'
+  ] });
+
+// プラス: タブ追加ボタン
+export const plusIcon = (size = 14, color = 'currentColor') =>
+  icon({ size, color, paths: [
+    'M12 5v14',
+    'M5 12h14'
+  ] });
+
+// 複数ユーザー: キャラ選択ボタン
+export const usersIcon = (size = 14, color = 'currentColor') =>
+  icon({ size, color, paths: [
+    'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2',
+    'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+    'M22 21v-2a4 4 0 0 0-3-3.87',
+    'M16 3.13a4 4 0 0 1 0 7.75'
+  ] });
+
 export const paletteIcon = (size = 14, color = 'currentColor') =>
   icon({ size, color, paths: [
     'M12 2a10 10 0 0 0-1.16 19.93A2 2 0 0 0 13 20v-1a2 2 0 0 1 2-2h1.17c.94 0 1.67-.72 1.92-1.63A10 10 0 0 0 12 2Z',
