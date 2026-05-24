@@ -361,7 +361,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
         return new DivC({ class: [object_input_container, object_input_main_container] }).childIfs([
             {
                 If: Boolean(this._options.sectionTitle),
-                True: new DivC({ text: this._options.sectionTitle, class: object_input_section_title }),
+                True: () => new DivC({ text: this._options.sectionTitle, class: object_input_section_title }),
             },
             this._properties.map(property =>
                 this.createFieldElement(property)
@@ -436,20 +436,20 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
         // フィールドラッパーを作成（vanilla extractクラスを使用）
         return new DivC({ class: [object_input_field_row, object_input_field_row_full] }).childIf({
             If: Boolean(label),
-            True: new SpanC({ text: label, class: object_input_label }).childIf({
+            True: () => new SpanC({ text: label, class: object_input_label }).childIf({
                 If: Boolean(required),
-                True: new SpanC({ text: " *", class: object_input_required_mark }).setTooltip(tooltip)
+                True: () => new SpanC({ text: " *", class: object_input_required_mark }).setTooltip(tooltip)
             })
         }).child( // 入力フィールドラッパー
             new DivC({ class: [object_input_field_wrapper, object_input_field_wrapper_full] }).childIfs([
                 new DivC({ class: object_input_input_container }).child(inputComponent as unknown as HtmlComponentBase),
                 {
                     If: Boolean(helpText),
-                    True: new SpanC({ text: helpText, class: object_input_help_text })// 新機能: helpText表示
+                    True: () => new SpanC({ text: helpText, class: object_input_help_text })// 新機能: helpText表示
                 },
                 {
                     If: showErrorInline !== false, // エラー表示エリア。デフォルトはインライン表示。
-                    True: new DivC({ class: [object_input_error_message, object_input_error_message_full] }).tap(
+                    True: () => new DivC({ class: [object_input_error_message, object_input_error_message_full] }).tap(
                         (self) => { this._errorElements.set(key, self); }
                     )
                 }
@@ -463,7 +463,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
         return new DivC({ class: [object_input_field_row, object_input_field_row_full] }).childIfs([
             {
                 If: Boolean(label),
-                True: new SpanC({ text: label, class: object_input_label })
+                True: () => new SpanC({ text: label, class: object_input_label })
             },
             new DivC({ class: [object_input_nested, object_input_nested_full] }).child(
                 objectInput2.tap((objectInput) => {// ネストしたオブジェクトの値変更イベント設定とフィールド登録
@@ -498,7 +498,7 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
         return new DivC({ class: [object_input_field_row, object_input_field_row_full] }).childIfs([
             {
                 If: Boolean(label),
-                True: new SpanC({ text: label, class: object_input_label })
+                True: () => new SpanC({ text: label, class: object_input_label })
             },
             new DivC({ class: [object_input_field_wrapper, object_input_field_wrapper_full] }).child(listEditor)
         ]);
