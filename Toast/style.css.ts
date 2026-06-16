@@ -75,7 +75,8 @@ export const toastIcon = style({
 export const toastMessage = style({
     flex: 1,
     fontSize: '14px',
-    lineHeight: '1.4'
+    lineHeight: '1.4',
+    whiteSpace: 'pre-wrap'
 });
 
 // アクションボタン
