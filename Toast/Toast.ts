@@ -92,6 +92,25 @@ export class ToastManager extends LV2HtmlComponentBase {
         return id;
     }
 
+    /**
+     * 表示中の通知のメッセージを更新する。
+     * Why: 永続通知 (duration:0) の途中でカウントダウン等を表示するため。
+     * 既に dismiss された ID を渡した場合は no-op。
+     */
+    public updateMessage(id: string, message: string): void {
+        const item = this._toasts.get(id);
+        if (!item) return;
+        // Why: createToastElement は icon/message/buttons を子要素として作るが、
+        // ここではメッセージのみ差し替えたいので textContent 経由でピンポイント更新。
+        // 子要素2番目が message span (createToastElement の構造)
+        const messageElement = item.element.dom.element.children[1] as HTMLElement | undefined;
+        if (messageElement) {
+            messageElement.textContent = message;
+        }
+        // 内部の options も同期 (将来の updateMessage 連続呼出で正しい状態を保つ)
+        item.options = { ...item.options, message };
+    }
+
     /** 通知を閉じる */
     public dismiss(id: string): void {
         const item = this._toasts.get(id);
@@ -195,6 +214,7 @@ export class ToastManager extends LV2HtmlComponentBase {
 // グローバルアクセス用のヘルパー関数
 export const Toast = {
     notify: (options: IToastOptions) => ToastManager.getInstance().notify(options),
+    updateMessage: (id: string, message: string) => ToastManager.getInstance().updateMessage(id, message),
     dismiss: (id: string) => ToastManager.getInstance().dismiss(id),
     dismissAll: () => ToastManager.getInstance().dismissAll(),
     success: (message: string, options?: Partial<IToastOptions>) => ToastManager.getInstance().success(message, options),
