@@ -1,12 +1,6 @@
 import { ButtonC, Css長さ単位, DivC, HtmlComponentBase, LV2HtmlComponentBase, Px長さ, SpanC } from "SengenUI/index";
 
-
-
-
-
 import { IInputComponent, IRecordInput } from "../Interfaces/IInputComponent";
-import { ValidationRule } from "../Interfaces/Validation";
-
 import {
     record_input_container,
     record_section_title,
@@ -21,90 +15,14 @@ import {
     record_add_button,
     record_empty_message,
     record_table_header,
-    record_error_message,
-    record_validation_error
 } from "./style.css";
 
-/**
- * バリデーションルール定義
- */
+import { RecordEntryTemplate, RecordEntryOptions } from "./RecordEntryTemplate";
+import { RecordEntry } from "./RecordEntry";
 
-
-/**
- * RecordEntryOptions - エントリの装飾とバリデーション
- * ObjectInputのPropertyOptionsに相当する役割
- */
-export interface RecordEntryOptions<K extends string | number, V> {
-    // ラベル
-    keyLabel?: string;
-    valueLabel?: string;
-
-    // バリデーション
-    keyValidator?: ValidationRule<K>;
-    valueValidator?: ValidationRule<V>;
-    uniqueKeys?: boolean;
-
-    // UI設定
-    keyPlaceholder?: string;
-    valuePlaceholder?: string;
-    keyDisabled?: boolean;
-    valueDisabled?: boolean;
-
-    // 表示制御
-    showKeyInline?: boolean;
-    compactMode?: boolean;
-
-    // デフォルト値
-    defaultKey?: K;
-    defaultValue?: V;
-}
-
-/**
- * RecordEntryTemplate - キーと値のInputコンポーネントを結びつける
- * ObjectInputのPropertyTypeに相当する役割
- */
-export class RecordEntryTemplate<K extends string | number, V> {
-    public readonly keyInputFactory: () => IInputComponent<K>;
-    public readonly valueInputFactory: () => IInputComponent<V>;
-    private _options?: RecordEntryOptions<K, V>;
-
-    constructor(
-        keyInputFactory: (() => IInputComponent<K>) | IInputComponent<K>,
-        valueInputFactory: (() => IInputComponent<V>) | IInputComponent<V>
-    ) {
-        // ファクトリー関数または直接インスタンスを受け取る
-        if (typeof keyInputFactory === 'function') {
-            this.keyInputFactory = keyInputFactory;
-        } else {
-            const keyInputCtor = keyInputFactory.constructor as any;
-            this.keyInputFactory = () => new keyInputCtor() as IInputComponent<K>;
-        }
-
-        if (typeof valueInputFactory === 'function') {
-            this.valueInputFactory = valueInputFactory;
-        } else {
-            const valueInputCtor = valueInputFactory.constructor as any;
-            this.valueInputFactory = () => new valueInputCtor() as IInputComponent<V>;
-        }
-    }
-
-    /**
-     * オプション設定（メソッドチェーン）
-     */
-    public withOptions(options: RecordEntryOptions<K, V>): this {
-        this._options = options;
-        return this;
-    }
-
-    public getOptions(): RecordEntryOptions<K, V> | undefined {
-        return this._options;
-    }
-
-    public bind(func: (self: this) => void): this {
-        func(this);
-        return this;
-    }
-}
+// 外部インポートの互換性のために再エクスポート
+export { RecordEntryTemplate };
+export type { RecordEntryOptions };
 
 /**
  * RecordInputのオプション
@@ -140,60 +58,6 @@ interface InternalRecordInputOptions {
     emptyMessage: string;
     keyColumnWidth: Css長さ単位<any>;
     onChange: (value: Record<string, any>) => void;
-}
-
-/**
- * RecordEntry - 1つのキー・値ペアを表現する内部クラス
- */
-class RecordEntry<K extends string | number, V> {
-    public readonly id: number;
-    public keyComponent: HtmlComponentBase;
-    public valueComponent: HtmlComponentBase;
-    public rowElement: DivC;
-    private _currentKey: K;
-    private _keyInput: IInputComponent<K>;
-    private _valueInput: IInputComponent<V>;
-
-    constructor(
-        id: number,
-        keyInput: IInputComponent<K>,
-        valueInput: IInputComponent<V>,
-        initialKey: K,
-        initialValue: V
-    ) {
-        this.id = id;
-        this._keyInput = keyInput;
-        this._valueInput = valueInput;
-        this._currentKey = initialKey;
-
-        // 初期値設定
-        this._keyInput.setValue(initialKey);
-        this._valueInput.setValue(initialValue);
-
-        // UIComponentBaseとして保持
-        this.keyComponent = keyInput as unknown as HtmlComponentBase;
-        this.valueComponent = valueInput as unknown as HtmlComponentBase;
-    }
-
-    public getCurrentKey(): K {
-        return this._currentKey;
-    }
-
-    public updateKey(newKey: K): void {
-        this._currentKey = newKey;
-    }
-
-    public getKeyInput(): IInputComponent<K> {
-        return this._keyInput;
-    }
-
-    public getValueInput(): IInputComponent<V> {
-        return this._valueInput;
-    }
-
-    public getValue(): V {
-        return this._valueInput.getValue();
-    }
 }
 
 /**
