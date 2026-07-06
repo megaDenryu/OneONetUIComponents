@@ -1,10 +1,6 @@
 import { DivC, HtmlComponentBase, LV2HtmlComponentBase, SpanC } from "SengenUI/index";
 
-
-
-
 import { IInputComponent, IObjectInput } from "../Interfaces/IInputComponent";
-import { ValidationRule, IValidationRulesStatic, ValidationRules } from "../Interfaces/Validation";
 import { ListEditorInput } from "../ListInput/ListEditorInput";
 import { ObjectInputStateDisplay } from "./ObjectInputStateDisplay";
 import {
@@ -28,65 +24,12 @@ import {
     object_input_error_message_hidden
 } from "./style.css";
 
-/**
- * 条件付き表示管理のインターフェース
- */
-interface IConditionalDisplayManager<T> {
-    addCondition(field: keyof T, condition: (value: T) => boolean, element: HtmlComponentBase): void;
-    updateVisibility(value: T): void;
-}
-
-/**
- * 条件付き表示の管理クラス
- */
-class ConditionalDisplayManager<T> implements IConditionalDisplayManager<T> {
-    private conditions: Map<keyof T, (value: T) => boolean> = new Map();
-    private elements: Map<keyof T, HtmlComponentBase> = new Map();
-
-    public addCondition(field: keyof T, condition: (value: T) => boolean, element: HtmlComponentBase): void {
-        this.conditions.set(field, condition);
-        this.elements.set(field, element);
-    }
-
-    public updateVisibility(value: T): void {
-        for (const [field, condition] of this.conditions) {
-            const element = this.elements.get(field);
-            if (element) {
-                const shouldShow = condition(value);
-                element.setStyleCSS({
-                    display: shouldShow ? 'block' : 'none'
-                });
-            }
-        }
-    }
-}
-
-/**
- * バリデーションルール定義
- */
-
-
-/**
- * リストフィールド設定
- */
-export interface ListFieldConfig<T> {
-    itemFactory: (value?: T, index?: number) => HtmlComponentBase;
-    extractValue: (component: HtmlComponentBase, index: number) => T;
-    initialValues?: T[];
-    minItems?: number;
-    maxItems?: number;
-    allowReorder?: boolean;
-    addButtonText?: string;
-}
-
-/**
- * 条件付き表示設定
- */
-export interface ConditionalDisplay<TObj> {
-    dependsOn: keyof TObj;
-    condition: (value: any) => boolean;
-    hideWhen?: boolean;
-}
+import { ConditionalDisplayManager } from "./ConditionalDisplayManager";
+import { PropertyType } from "./PropertyType";
+import { PropertyOptions } from "./PropertyOptions";
+import { Property } from "./Property";
+import { ObjectProperty } from "./ObjectProperty";
+import { ListProperty } from "./ListProperty";
 
 /**
  * クロスフィールドバリデーション
@@ -95,169 +38,6 @@ export interface CrossFieldValidation<T> {
     fields: (keyof T)[];
     validator: (values: Partial<T>) => boolean | string;
     message?: string;
-}
-
-/**
- * PropertyType - 型を示すコア部分（key + inputComponent）
- */
-export interface IPropertyType<TObj, TField> {
-    key: keyof TObj;
-    inputComponent: IInputComponent<TField>;
-}
-
-export class PropertyType<TObj extends Record<string, any>, TField> implements IPropertyType<TObj, TField> {
-    key: keyof TObj;
-    inputComponent: IInputComponent<TField>;
-
-    constructor(key: keyof TObj, inputComponent: IInputComponent<TField>) {
-        this.key = key;
-        this.inputComponent = inputComponent;
-    }
-
-    public bind(func: (self: this) => void): this {
-        func(this);
-        return this;
-    }
-}
-
-/**
- * PropertyOptions - UI装飾とオプション設定
- */
-export interface IPropertyOptions<TObj, TField> {
-    label?: string;
-    required?: boolean;
-    defaultValue?: TField;
-    description?: string;
-    validations?: ValidationRule<TField | undefined>[];
-    conditional?: ConditionalDisplay<TObj>;
-    // 新機能: UI拡張オプション
-    placeholder?: string;
-    helpText?: string;
-    tooltip?: string;
-    disabled?: boolean;
-    readonly?: boolean;
-    // エラー表示設定
-    showErrorInline?: boolean;
-    errorDisplayMode?: "tooltip" | "inline" | "none";
-}
-
-export class PropertyOptions<TObj extends Record<string, any>, TField = any> implements IPropertyOptions<TObj, TField> {
-    label?: string;
-    required?: boolean;
-    defaultValue?: TField;
-    description?: string;
-    validations?: ValidationRule<TField | undefined>[];
-    conditional?: ConditionalDisplay<TObj>;
-    // 新機能: UI拡張オプション
-    placeholder?: string;
-    helpText?: string;
-    tooltip?: string;
-    disabled?: boolean;
-    readonly?: boolean;
-    // エラー表示設定
-    showErrorInline?: boolean;
-    errorDisplayMode?: "tooltip" | "inline" | "none";
-
-    constructor(options: IPropertyOptions<TObj, TField>) {
-        Object.assign(this, options);
-    }
-
-    public bind(func: (self: this) => void): this {
-        func(this);
-        return this;
-    }
-}
-
-/**
- * ObjectProperty - ネストしたオブジェクト用プロパティ
- */
-export class ObjectProperty<TObj extends Record<string, any>, TField extends Record<string, any>> implements IObjectProperty<TObj, TField> {
-    key: keyof TObj;
-    label?: string;
-    objectInput2: ObjectInput<TField>;
-
-    constructor(key: keyof TObj, objectInput2: ObjectInput<TField>, label?: string) {
-        this.key = key;
-        this.objectInput2 = objectInput2;
-        this.label = label;
-    }
-
-    public tap(func: (self: this) => void): this {
-        func(this);
-        return this;
-    }
-}
-
-/**
- * ListProperty - リスト用プロパティ
- */
-export class ListProperty<TObj extends Record<string, any>, TField> implements IListProperty<TObj, TField> {
-    key: keyof TObj;
-    label?: string;
-    listConfig: ListFieldConfig<TField>;
-    options?: PropertyOptions<TObj, TField[]>;
-
-    constructor(key: keyof TObj, listConfig: ListFieldConfig<TField>, label?: string) {
-        this.key = key;
-        this.listConfig = listConfig;
-        this.label = label;
-    }
-
-    public tap(func: (self: this) => void): this {
-        func(this);
-        return this;
-    }
-
-    public withOptions(options: PropertyOptions<TObj, TField[]>): this {
-        this.options = options;
-        return this;
-    }
-}
-
-/**
- * Property - PropertyTypeとPropertyOptionsの組み合わせ
- */
-export interface IProperty<TObj extends Record<string, any>, TField> {
-    propertyType: PropertyType<TObj, TField>;
-    options: PropertyOptions<TObj, TField>;
-    tap(func: (self: IProperty<TObj, TField>) => void): IProperty<TObj, TField>;
-}
-
-/**
- * ObjectProperty インターフェース
- */
-export interface IObjectProperty<TObj extends Record<string, any>, TField extends Record<string, any>> {
-    key: keyof TObj;
-    label?: string;
-    objectInput2: ObjectInput<TField>;
-    tap(func: (self: IObjectProperty<TObj, TField>) => void): IObjectProperty<TObj, TField>;
-}
-
-/**
- * ListProperty インターフェース
- */
-export interface IListProperty<TObj extends Record<string, any>, TField> {
-    key: keyof TObj;
-    label?: string;
-    listConfig: ListFieldConfig<TField>;
-    options?: PropertyOptions<TObj, TField[]>;
-    tap(func: (self: IListProperty<TObj, TField>) => void): IListProperty<TObj, TField>;
-    withOptions(options: PropertyOptions<TObj, TField[]>): IListProperty<TObj, TField>;
-}
-
-export class Property<TObj extends Record<string, any>, TField = any> implements IProperty<TObj, TField> {
-    propertyType: PropertyType<TObj, TField>;
-    options: PropertyOptions<TObj, TField>;
-
-    constructor(propertyType: PropertyType<TObj, TField>, options: PropertyOptions<TObj, any>) {
-        this.propertyType = propertyType;
-        this.options = options;
-    }
-
-    public tap(func: (self: this) => void): this {
-        func(this);
-        return this;
-    }
 }
 
 /**
@@ -371,8 +151,6 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
                 object_input_layout[this._options.layout] || object_input_layout.vertical :
                 null
             );
-
-
     }
 
     private createFieldElement(property: Property<T, any> | ObjectProperty<T, any> | ListProperty<T, any>): HtmlComponentBase | undefined {
@@ -658,5 +436,3 @@ export class ObjectInput<T extends Record<string, any>> extends LV2HtmlComponent
         return this;
     }
 }
-
-
