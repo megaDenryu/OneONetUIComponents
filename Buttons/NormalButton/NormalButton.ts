@@ -1,4 +1,4 @@
-import { ButtonC, HaveHtmlElementProxy, HtmlComponentBase, HtmlElementProxy, LV2HtmlComponentBase } from "SengenUI/index";
+import { ButtonC, HaveHtmlElementProxy, HtmlElementProxy, LV2HtmlComponentBase } from "SengenUI/index";
 
 import { ReactiveProperty } from "TypeScriptBenriKakuchou/BaseClasses/observer";
 import { IButton } from "../IButton";
@@ -12,10 +12,11 @@ import { VanillaExtractClassName } from "TypeScriptBenriKakuchou/VanilaExtractEx
 
 
 export class NormalButton extends LV2HtmlComponentBase implements HaveHtmlElementProxy, IButton {
+    declare protected _componentRoot: ButtonC;
     private _title: string;
     private _view: ReactiveProperty<VanillaExtractClassName>;
     private _onClick: (() => void)[] = [];
-    
+
     constructor(title: string, defaultView: VanillaExtractClassName) {
         super();
         this._title = title;
@@ -25,8 +26,14 @@ export class NormalButton extends LV2HtmlComponentBase implements HaveHtmlElemen
         return this;
     }
 
-    protected createComponentRoot(): HtmlComponentBase {
+    protected createComponentRoot(): ButtonC {
         return new ButtonC({text: this._title}).addTypedEventListener("click", () => {this.onClick();});
+    }
+
+    /** ボタンの押下可否を切り替える。無効時は押しても onClick が発火しない (ButtonC.setDisabled 経由)。 */
+    public setDisabled(disabled: boolean): NormalButton {
+        this._componentRoot.setDisabled(disabled);
+        return this;
     }
 
     protected createDomProxy(): HtmlElementProxy {
